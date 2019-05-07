@@ -1,0 +1,50 @@
+[
+    {
+        "code": "MA135",
+        "title": "Math for Adults",
+        "description": "Calculating tips, doing taxes, and other adult math stuff they don't teach you in school",
+        "capacity": 8
+    },
+    {
+        "code": "OT144",
+        "title": "Urban Kayaking",
+        "description": "The craziest extreme sport you've never heard of!",
+        "capacity": 6
+    },
+    {
+        "code": "G3502",
+        "title": "Basics of Guitar",
+        "description": "Trick people at parties into thinking you're a musician",
+        "capacity": 10
+    },
+    {
+        "code": "PG101",
+        "title": "Programming 101",
+        "description": "Become the cool hacker you've always wanted to be",
+        "capacity": 10
+    },
+    {
+        "code": "SOC99",
+        "title": "Social Media",
+        "description": "A modern guide to navigating social media in 2019",
+        "capacity": 5
+    },
+    {
+        "code": "TR732",
+        "title": "Theatre and Performance",
+        "description": "Join us on the stage as we put on our annual performance",
+        "capacity": 15
+    },
+    {
+        "code": "HVD50",
+        "title": "What They Teach You at Harvard",
+        "description": "Disclosure: Not taught by an actual Harvard alumni",
+        "capacity": 4
+    },
+    {
+        "code": "HVD51",
+        "title": "What They DON'T Teach You at Harvard",
+        "description": "The critically acclaimed course is now available here in Chicago",
+        "capacity": 6
+    }
+]

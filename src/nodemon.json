@@ -1,0 +1,6 @@
+{
+    "env": {
+        "MONGO_ATLAS_PW": "restful",
+        "MONGO_ATLAS_UN": "adminUser"
+    }
+}
