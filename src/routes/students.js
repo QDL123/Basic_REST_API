@@ -11,7 +11,6 @@ const courseModel = require('../models/courseModel');
 *
 *  The endpoint currently responds with a hardcoded testStudent to illustrate what a real response could look like
 */
-
 router.get('/:someId', function (req, res) {
   try {
 
@@ -71,10 +70,6 @@ router.post('/register', function (req, res) {
 /* 
 *  POST - ENROLL STUDENT
 *  Enroll a student in a course
-
-It seems like more info is needed here. The student's id and the course id are needed
-intially the endpoint path is just /enroll.
-Does the request body contain the student and course Ids?
 */
 router.post('/enroll', function (req, res) {
   try {
@@ -83,7 +78,7 @@ router.post('/enroll', function (req, res) {
 
     //Check the course capacity and whether or not the studuent is alread enrolled.
     //Start with checking if the student is already enrolled
-    courseModel.findOne({'code': courseCode}, '_id capacity startDate students', function(err, course) {
+    courseModel.findOne({'code': courseCode}, function(err, course) {
       //Check for error in getting the course
       
       if (err) {
@@ -130,7 +125,7 @@ router.post('/enroll', function (req, res) {
       //Update the course in the database
       courseModel.findOneAndUpdate(
         {"_id" : course._id},
-        {"students" : course.students},
+        {"students" : course.students, "capacity" : course.capacity - 1},
         {new: true},
         (error, course) => {
           if(error) {
@@ -141,26 +136,30 @@ router.post('/enroll', function (req, res) {
         })
         .catch(error => {
           console.log(error);
-          res.status(500).send({"Error" : "Could not update course."});
+          res.status(500).send(error);
         });
-        
-    });
-    
+    });   
   } catch (e) {
     console.log(e);
-    res.status(500).send('Some error');
+    res.status(500).send(e);
   }
 });
 
-/////////////////////////////////
-//Bonus
-router.delete('/:studentId/delete', function (req, res) {
-  studentModel.findOneAndDelete(req.params.studentId, function (error) {
-    if(error) {;
-      return res.status(500).send({"Error" : "Could not delete student"})
+//Update Student
+router.patch('/:studentId/update', function(req, res) {
+  const studentId = req.params.studentId;
+  const updates = req.body;
+  console.log(updates)
+  studentModel.findOneAndUpdate(
+   {"_id" : studentId},
+   updates,
+   {new: true},
+   (error, student) => {
+    if(error) {
+      console.log(error)
+      return res.status(500).send(error);
     }
-
-    return res.status(200).send({"Success" : "Deleted student"});
+    return res.status(200).send(student);
   });
 });
 

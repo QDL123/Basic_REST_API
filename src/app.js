@@ -1,6 +1,5 @@
-//Includes Express
+//Import needed modules
 const express = require('express');
-//Honestly not sure what any of these things are
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -10,9 +9,7 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const courseModel = require('./models/courseModel');
 
-
-//console.log(`Environment password variable : ${process.env.MONGO_ATLAS_PW}`);
-const MONGO_PW = 'AYEauIn6VYYUlh2Y';
+const MONGO_PW = '';//Insert password here
 
 const deploymentURL = 'mongodb+srv://dbUser:' + 
     MONGO_PW +
@@ -20,10 +17,9 @@ const deploymentURL = 'mongodb+srv://dbUser:' +
 
 const localURL = 'mongodb://127.0.0.1:27017/HDVI';
 
-///////////////////////////////////////////////////////
+//Connect to the database
 mongoose.connect(deploymentURL, {useNewUrlParser: true})
     .then(result => {
-        //console.log(result);
         console.log("Successfully connected to the database.");
     })
     .catch(error => {
@@ -31,6 +27,7 @@ mongoose.connect(deploymentURL, {useNewUrlParser: true})
         console.log("Error: Could not connect to the database.");
     });
 
+//Retrieve the course information (Bonus)
 axios.get('https://hdvi-intern-api-prod.herokuapp.com/api/curriculum')
     .then(response => {
         const data = response.data;
@@ -61,26 +58,14 @@ axios.get('https://hdvi-intern-api-prod.herokuapp.com/api/curriculum')
         console.log('Unable to load courses');
     });
 
-    
-
-//////////////////////////////////////////////////////
-
-
-
-//Creates an instance of an express application
 const app = express();
 
-//No idea what these lines are doing, specifying some kind of settings in the express instance?
-//Probably don't need to mess with this
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 app.use(bodyParser.json());
-
-//Attempt to fix undefined body problem
-//app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // Set up the API endpoints
@@ -97,10 +82,5 @@ app.use('/api/hello', helloRouter);
 const port = 3000;
 app.listen(port);
 console.log('Express app started on port ' + port);
-
-//Not really sure, but this just tells whatever module is what to export
-//Where is module defined?
-
-//Get the contents
 
 module.exports = app;
