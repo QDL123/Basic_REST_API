@@ -1,2 +1,2 @@
-# HDVI-Intern-Challenge Solution
-This is my solution to the HDVI-Intern Challenge.
+# Basic REST API
+This is an implementation of a basic REST API.
